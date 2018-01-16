@@ -1,0 +1,24 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <div >
+      Parent
+      <div id="container">
+        Child
+        <div>
+          Child of Child
+        </div>
+      </div>
+    </div>
+    <script>
+      var newContainer = document.createElement("div");
+      newContainer.innerHTML = "取代原本的 div container!" ;
+      var container = document.getElementById("container");
+      newContainer.id = container.id;
+      newContainer.className = container.className;
+      container.parentNode.replaceChild(newContainer, container);
+    </script>
+  </body>
+</html>
