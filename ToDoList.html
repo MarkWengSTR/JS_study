@@ -1,11 +1,69 @@
 <html>
   <head>
-    <script>type="text/javascript" src="js/todolist.js"</script>
+
   </head>
   <body>
     <input type="text" id="input"></input>
     <button onclick="createToDo()"> + </button>
+    <form >
+       <input type="radio" name="urg" id="urg" value= "1" checked> 緊急
+       <input type="radio" name="urg" id="noturg" value= "2" > 不緊急
+    </form> 
     <div id="todolist"></div>
+    <script>
+    function createToDo(){
+      var todo = document.createElement("div");
+      var span = document.createElement("span");
+      var replaceButton = document.createElement("button");
+      var removeButton = document.createElement("button");
 
+
+      var input = document.getElementById("input").value;
+      if (input == "") {
+        input = "不要發廢文"
+      } 
+      span.innerHTML = input;
+      todo.appendChild(span);
+      
+      var urgent = document.getElementById("urg").checked;
+      
+      
+      if (urgent == true ) {
+        span.style.color = "red";
+      } else {
+        span.style.color = "green";
+      }
+      
+
+      replaceButton.onclick = function(){
+        var input = document.getElementById("input").value; 
+         if (input == "") {
+        alert("你沒有輸入任何文字");
+        return;
+      }  
+      this.parentNode.firstChild.innerHTML = input;
+      document.getElementById("input").value = "";
+      }
+      replaceButton.textContent = "R";
+      todo.appendChild(replaceButton);
+
+      removeButton.onclick = function(){
+       if ( confirm("是否確定完成？")) {
+         this.parentNode.removeChild(replaceButton);
+         this.parentNode.removeChild(removeButton);
+         span.style.color = "blue";
+         //this.parentNode.parentNode.removeChild(this.parentNode);
+       }
+          
+      }
+      removeButton.textContent = "V";
+      todo.appendChild(removeButton);
+      
+      var todolist = document.getElementById("todolist");
+      todolist.appendChild(todo);
+      document.getElementById("input").value = "";
+      
+    }
+    </script>
   </body>
 </html>
