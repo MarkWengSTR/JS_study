@@ -1,10 +1,45 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/index.js"></script>
+<!--     <script type="text/javascript" src="js/index.js"></script> -->
   </head>
   <body>
     <img id="image" src="img/on.jpg" width="400" height="300">
     <button onclick="togglelight();" > ON <br> - <br> OFF </button>
-    <div class="div" id="timer">5</div>
+    <div class="div" id="timer">NaN</div>
+    <form>
+      <input type="text" id="time_input"> 
+      <input type="button" value="倒數時間" onclick="input_time_number()">
+    </form>
+    <script>
+      var state = true;
+      function togglelight() {
+        var image = document.getElementById("image");
+        state = !state;
+        image.src = state? "img/on.jpg" : "img/off.jpg";
+      }
+
+      function input_time_number() {
+        var time_input = document.getElementById("time_input").value;
+        if (time_input == ""){
+          alert ("不能是空的");
+        } else if (isNaN(time_input)) {
+          alert ("請輸入數字");
+        } else {
+         var timeLeft = parseInt(time_input);    
+        }
+        
+       function countDownTimer() {
+         timeLeft = timeLeft - 1;
+        if (timeLeft <= 0) {
+          document.getElementById("image").src = "img/off.jpg";
+          clearInterval(setting);
+        }
+
+        document.getElementById("timer").innerHTML = timeLeft; 
+         
+      }
+      var setting =  setInterval(countDownTimer,1000);
+      }
+    </script>
   </body>
 </html>
