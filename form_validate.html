@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/form_validate.js"></script>
+    <!-- <script type="text/javascript" src="js/form_validate.js"></script> -->
   </head>
   <body>
     <form>
@@ -8,5 +8,23 @@
       <input type="button" value="驗證" onclick="validate()">
     </form>
     <p id="result"></p> 
+    <script>
+      function validate(){
+      var code = document.getElementById("nric").value;
+      if (code == "") {
+        alert("內容是空的！"); 
+      }
+      else if (!isNaN(code)) {
+        alert("內容不能是數字!"); 
+      }
+      else if (code.length !=10 ) {
+        alert("長度不正確")
+      }
+      else {
+       var code_Array = Array.from(code);
+       document.getElementById("result").innerHTML= code_Array[1] == "1" ? "某男通過驗證" : "某女通過驗證" ;
+      }
+    }
+    </script>
   </body>
 </html>
