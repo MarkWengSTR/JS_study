@@ -46,6 +46,7 @@ class BaseCharactar {
     hpElement.textContent = this.hp;
     hurtElement.style.width = (100 -this.hp / this.maxHp * 100) + "%";
   }
+
 }
 
 //招喚英雄
@@ -68,6 +69,13 @@ class Hero extends BaseCharactar {
   }
   getHurt(damage) {
     super.getHurt(damage);
+    this.updateHtml(this.hpElement, this.hurtElement);
+  }
+  heroHeal(){
+    this.hp += 30;
+    if (this.hp >= this.maxHp) {
+      this.hp = this.maxHp;
+    }
     this.updateHtml(this.hpElement, this.hurtElement);
   }
 }
@@ -100,6 +108,10 @@ function addskillEvent() {
     var skill = document.getElementById("skill");
     skill.onclick = function() {
       heroAttack();
+    }
+    var heal = document.getElementById("heal");
+    heal.onclick = function() {
+      hero.heroHeal();
     }
   }
 addskillEvent();
@@ -147,6 +159,7 @@ function heroAttack() {
     
 }
 
+
 function finish() {
   var dialog = document.getElementById("dialog");
   dialog.style.display = "block";
@@ -158,4 +171,4 @@ function finish() {
 }
 
 var hero = new Hero("Mark",130, 30);
-var monster = new Monster("SSS",130,10);
+var monster = new Monster("SSS",130,30);
