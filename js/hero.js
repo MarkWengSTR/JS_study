@@ -72,7 +72,7 @@ class Hero extends BaseCharactar {
     this.updateHtml(this.hpElement, this.hurtElement);
   }
   heroHeal(){
-
+    document.getElementsByClassName("skill-block")[0].style.display = "none";
     var _this = this;
     var healcount = 1;
     _this.id = setInterval(function(){
@@ -98,6 +98,18 @@ class Hero extends BaseCharactar {
     }
 
     this.updateHtml(this.hpElement, this.hurtElement);
+
+    setTimeout( function(){
+        monster.element.classList.add("attacking");
+        setTimeout(function(){
+          monster.attack(hero);
+          monster.element.classList.remove("attacking");
+          endTurn();
+          document.getElementsByClassName("skill-block")[0].style.display = "block";
+
+        },500);
+      },500 );
+
   }
 }
 
@@ -134,6 +146,16 @@ function addskillEvent() {
     heal.onclick = function() {
       hero.heroHeal();
     }
+    document.onkeydown = function(event) {
+      var key = String.fromCharCode(event.keyCode);
+      if (key == "A") {
+        heroAttack();
+      } else if (key == "D") {
+        hero.heroHeal();
+      }
+
+    }
+
   }
 addskillEvent();
 
@@ -179,6 +201,7 @@ function heroAttack() {
     },1100 );
     
 }
+
 
 
 function finish() {
